@@ -13,6 +13,10 @@ import re
 import nltk
 from nltk.corpus import stopwords
 import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from 
+
 train = pd.read_csv("labeledTrainData.tsv", header=0, \
                     delimiter="\t", quoting=3)
 
@@ -38,7 +42,7 @@ def clean_review(review):
 
 def main():
     print "Cleaning review...\n"
-    train['clean_review'] = train['review'].map(clean_reviews)
+    train['clean_review'] = train['review'].map(clean_review)
 
     print "Creating bag of words... \n"
     # Initialize the "CountVectorizer" object, which is scikit-learn's
@@ -54,7 +58,13 @@ def main():
     # and learns the vocabulary; second, it transforms our training data
     # into feature vectors. The input to fit_transform should be a list of 
     # strings.
-    train_data_features = vectorizer.fit_transform(train['clean_reviews)
+    train_data_features = vectorizer.fit_transform(train['clean_review'])
+    # Convert to dense matrix
+    train_data_features.toarray()
+
+    # fit random forest
+    # predict on test data
+    
 
     # Semantria
     # Jay Filiatrault, VP business development
